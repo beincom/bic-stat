@@ -2,7 +2,11 @@
   "arbitrum-sepolia": {
     "EntryPoint": {
       "address": "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789",
-      "startBlock": 623334
+      "startBlock": 75140263
+    },
+    "BicTokenPaymaster": {
+      "address": "0x55501db97a4f85d308b14f8f704e6a56dd61ae36",
+      "startBlock": 75140263
     }
   }
 }
