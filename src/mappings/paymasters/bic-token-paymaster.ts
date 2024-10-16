@@ -4,7 +4,7 @@ import {
 import {
   ChargeFee,
 } from "../../../generated/schema"
-import { getSubgraphConfig, loadBicInformation } from "../../utils"
+import { getSubgraphConfig, loadBicInformation, loadTransactionUserOp } from "../../utils"
 
 export function handleChargeFee(event: ChargeFeeEvent): void {
   const subgraphConfig = getSubgraphConfig()
@@ -14,15 +14,20 @@ export function handleChargeFee(event: ChargeFeeEvent): void {
     return;
   }
 
-  let entity = new ChargeFee(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.sender = event.params.sender
-  entity._fee = event.params._fee
+  let txUserOp = loadTransactionUserOp(event)
+  txUserOp.feesByBic = txUserOp.feesByBic.concat([event.params._fee])
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  // NOTE(Ted): Dont save more record to optimize cost
+  // let entity = new ChargeFee(
+  //   event.transaction.hash.concatI32(event.logIndex.toI32()),
+  // )
+  // entity.sender = event.params.sender
+  // entity.fee = event.params._fee
 
-  entity.save()
+  // entity.blockNumber = event.block.number
+  // entity.blockTimestamp = event.block.timestamp
+  // entity.transactionHash = event.transaction.hash
+
+  // entity.save()
+  txUserOp.save()
 }

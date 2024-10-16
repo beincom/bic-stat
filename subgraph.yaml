@@ -18,6 +18,7 @@ dataSources:
       entities:
         - Deposited
         - UserOperationEvent
+        - TransactionUserOp
       abis:
         - name: EntryPoint
           file: ./abis/EntryPoint.json
@@ -41,6 +42,7 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - ChargeFee
+        - TransactionUserOp
       abis:
         - name: BicTokenPaymaster
           file: ./abis/BicTokenPaymaster.json

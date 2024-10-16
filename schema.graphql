@@ -8,6 +8,16 @@ type Deposited @entity(immutable: true) {
   id: Bytes!
   account: Bytes! # address
   totalDeposit: BigInt! # uint256
+  depositedAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransactionUserOp @entity {
+  id: Bytes!
+  feesByETH: [BigInt!]! # uint256
+  feesByBic: [BigInt!]! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -30,7 +40,7 @@ type UserOperationEvent @entity(immutable: true) {
 type ChargeFee @entity(immutable: true) {
   id: Bytes!
   sender: Bytes! # address
-  _fee: BigInt! # uint256
+  fee: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
