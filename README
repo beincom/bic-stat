@@ -1,0 +1,8 @@
+# Deploy
+- yarn codegen
+- yarn build --network arbitrumSepolia
+- graph deploy bic-stat \
+  --version-label v0.0.1 \
+  --node https://subgraphs.alchemy.com/api/subgraphs/deploy \
+  --deploy-key your_key \
+  --ipfs https://ipfs.satsuma.xyz
